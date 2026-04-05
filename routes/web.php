@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Room;
+
+Route::get('/test', function () {
+    return Room::with('theme')->get();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
