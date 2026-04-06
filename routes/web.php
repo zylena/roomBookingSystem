@@ -2,17 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Room;
+
+Route::get('/test', function () {
+    return Room::with('theme')->get();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| This file is intentionally kept minimal. Most application routes are
+| organized into side-specific route files (public, user, admin).
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Keep this file available for quickly adding global routes if needed.
+// All primary routes are defined in routes/public.php, routes/user.php, and routes/admin.php.
