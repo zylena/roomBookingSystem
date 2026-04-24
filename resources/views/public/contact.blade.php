@@ -5,11 +5,19 @@
 @section('content')
     <section style="padding-top: 1.5rem; padding-bottom: 2rem;">
         <h1>Contact Us</h1>
-        <p style="max-width: 720px; color: rgba(31, 41, 55, 0.85);">Have a question or need help planning your next escape room session? Send us a message and we will get back to you shortly.</p>
+      
 
+
+        <p style="max-width: 720px; color: rgba(31, 41, 55, 0.85);">Have a question or need help planning your next escape room session? Send us a message and we will get back to you shortly.</p>
+        @if (session('success'))
+                    <div class="card" style="margin-top: 1rem; background: #dcfce7; color: #166534;">
+                        {{ session('success') }}
+                    </div>
+                @endif
         <div class="card" style="max-width: 620px; margin-top: 1.5rem;">
-            <form action="#" method="POST">
-                <div class="form-field">
+            <form action="{{ route('public.contact.submit') }}" method="POST">
+             @csrf
+                    <div class="form-field">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" placeholder="Your name" required>
                 </div>
@@ -32,3 +40,4 @@
         </div>
     </section>
 @endsection
+
