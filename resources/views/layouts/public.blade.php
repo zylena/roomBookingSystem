@@ -298,8 +298,18 @@
             <h4 style="color: #fff; margin-bottom: 0.75rem;">Support</h4>
             <ul style="list-style: none; padding: 0; margin: 0;">
                 <li><a href="#">Help center</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Terms</a></li>
+                <li><a href="{{ route('public.privacy') }}">Privacy</a></li>
+<li><a href="{{ route('public.terms') }}">Terms</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4 style="color:#fff;margin-bottom:0.75rem;">Quick links</h4>
+            <ul style="list-style:none;padding:0;margin:0;">
+                <li><a href="{{ route('public.rooms.index') }}">Rooms</a></li>
+                <li><a href="{{ route('public.about') }}">About</a></li>
+                <li><a href="{{ route('public.contact') }}">Contact</a></li>
+                <li><a href="{{ route('public.faq') }}">FAQ / Rules</a></li>  <!-- Added this line -->
             </ul>
         </div>
 

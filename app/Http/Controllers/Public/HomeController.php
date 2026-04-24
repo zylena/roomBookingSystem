@@ -23,4 +23,19 @@ class HomeController extends Controller
     {
         return view('public.contact');
     }
+
+    public function faq()
+    {
+    return view('public.faq');
+    }
+
+    public function privacy()
+    {
+    return view('public.privacy');
+    }
+
+public function terms()
+    {
+    return view('public.terms');
+    }
 }

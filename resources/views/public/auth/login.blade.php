@@ -29,6 +29,11 @@
                 <div class="text-danger">{{ $message }}</div>
                 @enderror
                 
+                 <div style="text-align: right; margin-bottom: 1rem;">
+                    <a href="{{ route('password.request') }}">Forgot Password?</a>
+                </div>
+            
+
                 <div class="form-actions">
                     <button type="submit" class="btn">Login</button>
                     <a href="{{ route('public.register') }}" class="btn btn--secondary">Create account</a>
