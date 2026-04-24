@@ -5,8 +5,7 @@
 @section('content')
     <section style="padding-top: 1.5rem; padding-bottom: 2rem; max-width: 520px; margin: 0 auto;">
         <h1>Create an account</h1>
-        <p style="color: rgba(31, 41, 55, 0.8);">This registration form is a placeholder that stores the user data in session for the purpose of this scaffold.</p>
-
+       
         <div class="card" style="margin-top: 1.5rem;">
             <form method="POST" action="{{ route('public.register.post') }}">
                 @csrf

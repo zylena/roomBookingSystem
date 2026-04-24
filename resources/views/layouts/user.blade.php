@@ -223,14 +223,25 @@
 <body>
 <header>
     <div class="topbar">
-        <div class="brand"><a href="{{ route('user.dashboard') }}">Escape Room Booking</a></div>
+        <div class="brand">Escape Room Booking</div>
+
         <div class="topbar__actions">
-            <span style="color: var(--muted);">Logged in as <strong>{{ session('app_user.name') ?? 'Guest' }}</strong></span>
-            <a href="{{ route('public.home') }}" class="btn">Public site</a>
+            <span style="color: var(--muted);">
+                Logged in as <strong>{{ auth()->user()->name }}</strong>
+
+                 @if(auth()->user()->role)
+                        ({{ auth()->user()->role }})
+                    @endif
+            </span>
+
             <form method="POST" action="{{ route('public.logout') }}" style="display:inline">
                 @csrf
-                <button type="submit" class="btn" style="background: #ef4444; color: #fff;">Logout</button>
+                <button type="submit" class="btn" style="background: #ef4444; color: #fff;">
+                    Logout
+                </button>
             </form>
+
+            
         </div>
     </div>
 </header>

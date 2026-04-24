@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="heading">
-        <h1>Welcome back, {{ session('app_user.name') ?? 'Player' }}!</h1>
+      <h1>Welcome back, {{ auth()->user()->name ?? 'Player' }}!</h1>
         <p style="color: rgba(31, 41, 55, 0.75); max-width: 720px;">This is your customer dashboard. From here you can manage bookings, update your profile, and view your history.</p>
     </div>
 

@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>@yield('title', 'Escape Room Booking System') - Escape Rooms</title>
     <style>
         :root {
@@ -94,6 +95,20 @@
             border: 1px solid transparent;
             background: var(--primary);
             color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+         .btnRegister {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.65rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            background: var(--primary);
+            color: #0e42ee;
             cursor: pointer;
             font-weight: 600;
             text-decoration: none;
@@ -252,7 +267,7 @@
                     </form>
                 @else
                     <a href="{{ route('public.login') }}" class="btn btn--secondary">Login</a>
-                    <a href="{{ route('public.register') }}" class="btn">Register</a>
+                    <a href="{{ route('public.register') }}" class="btnRegister">Register</a>
                 @endif
             </nav>
         </div>
