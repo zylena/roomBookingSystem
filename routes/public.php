@@ -8,7 +8,8 @@ use App\Http\Controllers\Public\AuthController;
 // Public pages (no auth required)
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
-Route::get('/rooms/{slug}', [RoomController::class, 'show'])->name('rooms.show');
+
+Route::get('/rooms/{room_id}', [RoomController::class, 'show'])->name('rooms.show');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 

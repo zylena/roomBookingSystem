@@ -1,28 +1,39 @@
 @extends('layouts.public')
 
-@section('title', $room['name'])
+@section('title', $room->room_name)
 
 @section('content')
     <section style="padding-top: 1.5rem; padding-bottom: 2rem;">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
             <div>
-                <h1>{{ $room['name'] }}</h1>
-                <p style="max-width: 680px; color: rgba(31, 41, 55, 0.85);">{{ $room['description'] }}</p>
+                <h1>{{$room->room_name}}</h1>
+             @php
+                $roomImages = [
+                    1 => 'img/escapeRoom_Poster_1.jpg',
+                    2 => 'img/escapeRoom_Poster_2.jpg',
+                    3 => 'img/escapeRoom_Poster_3.jpg',
+                    4 => 'img/escapeRoom_Poster_4.jpg',
+                    5 => 'img/escapeRoom_Poster_5.jpg',
+                    6 => 'img/escapeRoom_Poster_6.jpg',
+                    7 => 'img/escapeRoom_Poster_7.jpg',
+                    8 => 'img/escapeRoom_Poster_8.jpg',
+                    9 => 'img/escapeRoom_Poster_9.jpg',
+                    10 => 'img/escapeRoom_Poster_10.jpg',
+                ];
+
+                $imagePath = $roomImages[$room->room_id] ?? 'img/rooms/default-room.jpg';
+            @endphp
+
+            <img src="{{ asset($imagePath) }}"
+        alt="{{ $room->room_name }}"
+        style="width: 100%; max-width: 320px; height: 420px; object-fit: cover; border-radius: 8px; margin: 1rem 0;">
 
                 <div style="margin: 1.5rem 0; display: flex; flex-wrap: wrap; gap: 0.75rem;">
-                    <span class="badge">Duration: {{ $room['duration'] }}</span>
-                    <span class="badge">Difficulty: {{ $room['difficulty'] }}</span>
-                    <span class="badge">Players: {{ $room['players'] }}</span>
+                    <span class="badge">Duration: {{ $room->duration_minutes }}</span>
+                    <span class="badge">Difficulty: {{ $room->difficulty_level }}</span>
+                    <span class="badge">Players: {{ $room->max_pax }}</span>
                 </div>
 
-                <div style="margin-top: 1.5rem;">
-                    <h3>What to expect</h3>
-                    <ul style="padding-left: 1.25rem; color: rgba(31, 41, 55, 0.8);">
-                        @foreach($room['features'] as $feature)
-                            <li>{{ $feature }}</li>
-                        @endforeach
-                    </ul>
-                </div>
 
                 <div style="margin-top: 2rem;">
                     <a href="{{ route('public.login') }}" class="btn">Book this room</a>

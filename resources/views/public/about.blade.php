@@ -10,6 +10,7 @@
         <div class="cards" style="margin-top: 2rem;">
             <div class="card">
                 <h3>Professional Layout</h3>
+               
                 <p>Each section of the application has a dedicated layout and navigation structure to keep the experience consistent.</p>
             </div>
             <div class="card">

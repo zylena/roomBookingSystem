@@ -17,10 +17,10 @@
         <div class="cards">
             @foreach($rooms as $room)
                 <div class="card">
-                    <h3>{{ $room['name'] }}</h3>
-                    <p style="color: var(--muted);">{{ $room['tagline'] }}</p>
-                    <p><strong>Duration:</strong> {{ $room['duration'] }} · <strong>Difficulty:</strong> {{ $room['difficulty'] }}</p>
-                    <a href="{{ route('public.rooms.show', $room['slug']) }}" class="btn" style="margin-top: 0.75rem; display: inline-block;">View Details</a>
+                    <h3>{{ $room->room_name }}</h3>
+                    <p style="color: var(--muted);">{{ $room->description }}</p>
+                    <p><strong>Duration:</strong> {{ $room->duration_minutes }} · <strong>Difficulty:</strong> {{ $room->difficulty_level }}</p>
+                    <a href="{{ route('public.rooms.show', $room->room_id) }}" class="btn" style="margin-top: 0.75rem; display: inline-block;">View Details</a>
                 </div>
             @endforeach
         </div>

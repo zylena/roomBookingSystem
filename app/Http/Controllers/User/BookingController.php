@@ -34,11 +34,7 @@ class BookingController extends Controller
 
     public function create()
     {
-        $rooms = [
-            ['id' => 1, 'name' => 'The Labyrinth'],
-            ['id' => 2, 'name' => 'Haunted Mansion'],
-            ['id' => 3, 'name' => 'Bank Heist'],
-        ];
+       $rooms = Room::all();
 
         return view('user.bookings.create', compact('rooms'));
     }
@@ -58,18 +54,14 @@ class BookingController extends Controller
 
     public function payment($id)
     {
-        $booking = [
-            'id' => $id,
-            'room' => 'The Labyrinth',
-            'date' => '2026-04-01',
-            'amount' => 120,
-        ];
+       
 
         return view('user.bookings.payment', compact('booking'));
     }
 
     public function history()
     {
+        //
         $history = [
             ['id' => 84, 'room' => 'Bank Heist', 'date' => '2025-12-10', 'status' => 'Completed'],
             ['id' => 59, 'room' => 'Haunted Mansion', 'date' => '2025-10-21', 'status' => 'Completed'],

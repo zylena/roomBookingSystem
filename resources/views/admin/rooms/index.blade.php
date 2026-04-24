@@ -21,9 +21,9 @@
             <tbody>
                 @foreach($rooms as $room)
                     <tr>
-                        <td>{{ $room['id'] }}</td>
-                        <td>{{ $room['name'] }}</td>
-                        <td><span class="badge">{{ $room['status'] }}</span></td>
+                        <td>{{ $room->room_id }}</td>
+                        <td>{{ $room->room_name }}</td>
+                        <td><span class="badge">{{ $room->status }}</span></td>
                         <td><a href="#">Edit</a></td>
                     </tr>
                 @endforeach
