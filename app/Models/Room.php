@@ -23,13 +23,12 @@ class Room extends Model
         'status'
     ];
 
-    // 🔗 Room belongs to Theme
     public function theme()
     {
         return $this->belongsTo(Theme::class, 'theme_id');
     }
 
-    // 🔗 Room has many TimeSlots
+  
     public function timeSlots()
     {
         return $this->hasMany(TimeSlot::class, 'room_id');

@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
+use App\Models\Room;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         $metrics = [
-            'totalRooms' => 12,
-            'activeBookings' => 8,
-            'registeredUsers' => 64,
+            'totalRooms' => Room::count(),
+            'activeBookings' => Booking::whereIn('payment_status', ['pending', 'paid'])->count(),
+             'registeredUsers' => User::where('role', 'customer')->count(),
         ];
 
         return view('admin.dashboard', compact('metrics'));

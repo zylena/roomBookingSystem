@@ -21,13 +21,13 @@ class Booking extends Model
         'expires_at'
     ];
 
-    // 🔗 belongs to Room
+  
     public function room()
     {
         return $this->belongsTo(Room::class, 'room_id');
     }
 
-    // 🔗 belongs to TimeSlot
+ 
     public function timeSlot()
     {
         return $this->belongsTo(TimeSlot::class, 'slot_id');
