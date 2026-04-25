@@ -3,18 +3,52 @@
 @section('title', 'Manage Users')
 
 @section('content')
+<style>
+    .success-alert {
+        max-width: 1200px;
+        margin: 0 auto 1rem auto;
+        padding: 0.85rem 1rem;
+        border-radius: 12px;
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .action-group {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .action-group form {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-link {
+        color: #2563eb;
+        background: transparent;
+        border: none;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+
+    .btn-danger {
+        color: #dc2626;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 0.95rem;
+    }
+</style>
+
     <div class="heading">
         <div>
             <h1>Manage users</h1>
             <p class="heading-desc">View and manage users in the system. Extend this area with role management and permissions.</p>
         </div>
-        <button class="btn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-            </svg>
-            Add User
-        </button>
     </div>
 
     <div class="toolbar">
@@ -64,19 +98,14 @@
                         </td>
                         <td>{{ $user->created_at ? $user->created_at->format('Y-m-d') : '--' }}</td>
                         <td>
-                            <div class="table-actions">
-                                <a href="#" class="action-btn" title="Edit">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
-                                </a>
-                                <a href="#" class="action-btn action-btn--danger" title="Delete">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                    </svg>
-                                </a>
+                            <div class="action-group">
+                                <a href="{{ route('admin.users.edit', $user->id) }}" class="btn-link">Edit</a>
+
+                                <form method="POST" action="{{ route('admin.users.destroy', $user->id) }}" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn-danger">Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -88,7 +117,6 @@
 
 @section('scripts')
 <script>
-    // Search functionality
     const searchInput = document.querySelector('.search-box input');
     const filterSelect = document.querySelector('.filter-select');
     const tableRows = document.querySelectorAll('tbody tr');
@@ -111,35 +139,5 @@
 
     searchInput.addEventListener('input', filterTable);
     filterSelect.addEventListener('change', filterTable);
-
-    // Add User button
-    document.querySelector('.heading .btn').addEventListener('click', function() {
-        alert('Add User functionality - to be implemented');
-    });
-
-    // Edit button - redirect to edit page
-    document.querySelectorAll('.action-btn[title="Edit"]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const userId = this.closest('tr').querySelector('td:first-child').textContent;
-            window.location.href = '/admin/users/' + userId + '/edit';
-        });
-    });
-
-    // Delete button - submit form
-    document.querySelectorAll('.action-btn[title="Delete"]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (confirm('Are you sure you want to delete this user?')) {
-                const userId = this.closest('tr').querySelector('td:first-child').textContent;
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = '/admin/users/' + userId;
-                form.innerHTML = '@csrf @method("DELETE")';
-                document.body.appendChild(form);
-                form.submit();
-            }
-        });
-    });
 </script>
 @endsection

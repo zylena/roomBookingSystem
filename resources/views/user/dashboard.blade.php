@@ -22,8 +22,8 @@
         </div>
 
         <div class="card">
-            <h3>Favorites</h3>
-            <p style="margin: 0.6rem 0 1rem; color: rgba(31, 41, 55, 0.75);">Keep track of your favorite rooms and invite friends to join.</p>
+            <h3>Browse rooms</h3>
+            <p style="margin: 0.6rem 0 1rem; color: rgba(31, 41, 55, 0.75);">Explore available escape rooms and make a new booking.</p>
             <a href="{{ route('public.rooms.index') }}" class="btn" style="font-size: 0.9rem;">Browse rooms</a>
         </div>
     </div>

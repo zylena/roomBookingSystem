@@ -3,16 +3,21 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Placeholder dashboard metrics
+        $userId = auth()->id();
+
         $stats = [
-            'upcomingBookings' => 2,
-            'pastBookings' => 5,
-            'favoriteRooms' => 3,
+            'upcomingBookings' => Booking::where('user_id', $userId)
+                ->whereIn('payment_status', ['pending', 'paid'])
+                ->count(),
+            'pastBookings' => Booking::where('user_id', $userId)
+                ->where('payment_status', 'cancelled')
+                ->count(),
         ];
 
         return view('user.dashboard', compact('stats'));

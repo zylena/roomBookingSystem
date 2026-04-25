@@ -34,7 +34,7 @@ class UserController extends Controller
 
         $user->update($request->only(['name', 'email', 'role']));
 
-        return redirect()->route('admin.users.index')->with('status', 'User updated successfully.');
+        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
     }
 
     public function destroy($id)
@@ -42,6 +42,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with('status', 'User deleted successfully.');
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully.');
     }
 }

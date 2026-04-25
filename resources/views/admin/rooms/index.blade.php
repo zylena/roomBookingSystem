@@ -5,9 +5,9 @@
 @section('content')
 <style>
     .rooms-table .col-image {
-    width: 110px;
-    text-align: center;
-        }   
+        width: 110px;
+        text-align: center;
+    }
 
     .room-thumb {
         width: 80px;
@@ -15,6 +15,7 @@
         object-fit: cover;
         border-radius: 8px;
     }
+
     .rooms-header {
         display: flex;
         align-items: center;
