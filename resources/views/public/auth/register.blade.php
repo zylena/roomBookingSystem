@@ -3,6 +3,14 @@
 @section('title', 'Register')
 
 @section('content')
+<style>
+    .error-message {
+        color: #dc2626;
+        margin-top: 0.35rem;
+        font-size: 0.9rem;
+    }
+</style>
+
     <section style="padding-top: 1.5rem; padding-bottom: 2rem; max-width: 520px; margin: 0 auto;">
         <h1>Create an account</h1>
        
@@ -22,12 +30,18 @@
 
                 <div class="form-field">
                     <label for="password">Password</label>
-                    <input id="password" name="password" type="password" required>
+                    <input id="password" name="password" type="password" value="{{ old('password') }}" required>
+                    @error('password')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-field">
                     <label for="password_confirmation">Confirm password</label>
-                    <input id="password_confirmation" name="password_confirmation" type="password" required>
+                    <input id="password_confirmation" name="password_confirmation" type="password" value="{{ old('password_confirmation') }}" required>
+                    @error('password_confirmation')
+                        <div class="error-message">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-actions">
