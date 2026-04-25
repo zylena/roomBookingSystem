@@ -6,16 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Theme extends Model
 {
+    protected $table = 'themes';
     protected $primaryKey = 'theme_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'theme_name',
-        'description'
+        'description',
     ];
 
-    // 🔗 Theme has many Rooms
     public function rooms()
     {
-        return $this->hasMany(Room::class, 'theme_id');
+        return $this->hasMany(Room::class, 'theme_id', 'theme_id');
     }
 }

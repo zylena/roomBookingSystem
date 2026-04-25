@@ -52,6 +52,7 @@
 
     <div class="card" style="margin-top: 1.5rem;">
         <h2 style="margin-top: 0;">Quick links</h2>
+
         <div class="quick-links">
             <a href="{{ route('admin.rooms.index') }}" class="quick-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -72,14 +73,7 @@
                 </svg>
                 Manage users
             </a>
-            <a href="{{ route('admin.reports.index') }}" class="quick-link">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="20" x2="18" y2="10"></line>
-                    <line x1="12" y1="20" x2="12" y2="4"></line>
-                    <line x1="6" y1="20" x2="6" y2="14"></line>
-                </svg>
-                View reports
-            </a>
         </div>
     </div>
+
 @endsection
