@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@yield('title', 'User Dashboard') - Escape Room Booking</title>
+
     <style>
         :root {
             --primary: #2d6cdf;
@@ -199,6 +200,34 @@
             margin-top: 1.2rem;
         }
 
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.7rem 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(45, 108, 223, 0.18);
+            background: var(--primary);
+            color: #ffffff;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            text-decoration: none;
+            background: #1d4ed8;
+        }
+
+        .btn--secondary {
+            background: #ffffff;
+            color: var(--primary);
+        }
+
+        .btn--secondary:hover {
+            background: rgba(45, 108, 223, 0.08);
+        }
+
         .alert {
             padding: 1rem 1.25rem;
             border-radius: 12px;
@@ -220,6 +249,7 @@
         }
     </style>
 </head>
+
 <body>
 <header>
     <div class="topbar">
@@ -229,9 +259,9 @@
             <span style="color: var(--muted);">
                 Logged in as <strong>{{ auth()->user()->name }}</strong>
 
-                 @if(auth()->user()->role)
-                        ({{ auth()->user()->role }})
-                    @endif
+                @if(auth()->user()->role)
+                    ({{ auth()->user()->role }})
+                @endif
             </span>
 
             <form method="POST" action="{{ route('public.logout') }}" style="display:inline">
@@ -240,8 +270,6 @@
                     Logout
                 </button>
             </form>
-
-            
         </div>
     </div>
 </header>
@@ -249,11 +277,30 @@
 <div class="layout">
     <aside class="sidebar">
         <nav aria-label="User navigation">
-            <a href="{{ route('user.dashboard') }}" class="{{ request()->routeIs('user.dashboard') ? 'active' : '' }}">Dashboard</a>
-            <a href="{{ route('user.bookings.index') }}" class="{{ request()->routeIs('user.bookings.*') ? 'active' : '' }}">My Bookings</a>
-            <a href="{{ route('user.bookings.create') }}" class="{{ request()->routeIs('user.bookings.create') ? 'active' : '' }}">New Booking</a>
-            <a href="{{ route('user.profile') }}" class="{{ request()->routeIs('user.profile') ? 'active' : '' }}">My Profile</a>
-            <a href="{{ route('user.history') }}" class="{{ request()->routeIs('user.history') ? 'active' : '' }}">Booking History</a>
+            <a href="{{ route('user.dashboard') }}"
+               class="{{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
+                Dashboard
+            </a>
+
+            <a href="{{ route('user.bookings.index') }}"
+               class="{{ request()->routeIs('user.bookings.index') ? 'active' : '' }}">
+                My Bookings
+            </a>
+
+            <a href="{{ route('user.bookings.create') }}"
+               class="{{ request()->routeIs('user.bookings.create', 'user.bookings.payment') ? 'active' : '' }}">
+                New Booking
+            </a>
+
+            <a href="{{ route('user.profile') }}"
+               class="{{ request()->routeIs('user.profile') ? 'active' : '' }}">
+                My Profile
+            </a>
+
+            <a href="{{ route('user.bookings.history') }}"
+               class="{{ request()->routeIs('user.bookings.history') ? 'active' : '' }}">
+                Booking History
+            </a>
         </nav>
     </aside>
 

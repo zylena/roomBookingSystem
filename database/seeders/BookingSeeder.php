@@ -15,7 +15,7 @@ class BookingSeeder extends Seeder
                 'booking_reference' => 'BK20260410001',
                 'user_id' => 1,
                 'room_id' => 1,
-                'slot_id' => 1,
+                'slot_id' => null,
                 'customer_name' => 'Alice Tan',
                 'pax' => 4,
                 'total_amount' => 180.00,
@@ -29,7 +29,7 @@ class BookingSeeder extends Seeder
                 'booking_reference' => 'BK20260410002',
                 'user_id' => 2,
                 'room_id' => 1,
-                'slot_id' => 2,
+                'slot_id' => null,
                 'customer_name' => 'Ben Lee',
                 'pax' => 2,
                 'total_amount' => 90.00,
@@ -43,7 +43,7 @@ class BookingSeeder extends Seeder
                 'booking_reference' => 'BK20260410003',
                 'user_id' => 1,
                 'room_id' => 2,
-                'slot_id' => 3,
+                'slot_id' => null,
                 'customer_name' => 'Alice Tan',
                 'pax' => 3,
                 'total_amount' => 120.00,
@@ -57,7 +57,7 @@ class BookingSeeder extends Seeder
                 'booking_reference' => 'BK20260410004',
                 'user_id' => 4,
                 'room_id' => 2,
-                'slot_id' => 4,
+                'slot_id' => null,
                 'customer_name' => 'Chloe Lim',
                 'pax' => 5,
                 'total_amount' => 200.00,
@@ -71,7 +71,7 @@ class BookingSeeder extends Seeder
                 'booking_reference' => 'BK20260411005',
                 'user_id' => 5,
                 'room_id' => 3,
-                'slot_id' => 5,
+                'slot_id' => null,
                 'customer_name' => 'Daniel Wong',
                 'pax' => 4,
                 'total_amount' => 140.00,
@@ -85,7 +85,7 @@ class BookingSeeder extends Seeder
                 'booking_reference' => 'BK20260411006',
                 'user_id' => 6,
                 'room_id' => 4,
-                'slot_id' => 6,
+                'slot_id' => null,
                 'customer_name' => 'Emily Ng',
                 'pax' => 4,
                 'total_amount' => 220.00,
@@ -99,7 +99,7 @@ class BookingSeeder extends Seeder
                 'booking_reference' => 'BK20260412007',
                 'user_id' => 7,
                 'room_id' => 5,
-                'slot_id' => 7,
+                'slot_id' => null,
                 'customer_name' => 'Farah Ahmad',
                 'pax' => 3,
                 'total_amount' => 126.00,
@@ -113,7 +113,7 @@ class BookingSeeder extends Seeder
                 'booking_reference' => 'BK20260412008',
                 'user_id' => 8,
                 'room_id' => 6,
-                'slot_id' => 8,
+                'slot_id' => null,
                 'customer_name' => 'Gavin Teoh',
                 'pax' => 2,
                 'total_amount' => 76.00,
@@ -127,7 +127,7 @@ class BookingSeeder extends Seeder
                 'booking_reference' => 'BK20260413009',
                 'user_id' => 10,
                 'room_id' => 7,
-                'slot_id' => 9,
+                'slot_id' => null,
                 'customer_name' => 'Ian Tan',
                 'pax' => 2,
                 'total_amount' => 100.00,
@@ -141,7 +141,7 @@ class BookingSeeder extends Seeder
                 'booking_reference' => 'BK20260413010',
                 'user_id' => 2,
                 'room_id' => 8,
-                'slot_id' => 10,
+                'slot_id' => null,
                 'customer_name' => 'Ben Lee',
                 'pax' => 4,
                 'total_amount' => 176.00,
@@ -150,18 +150,6 @@ class BookingSeeder extends Seeder
                 'expires_at' => '2026-04-13 16:15:00',
                 'created_at' => '2026-04-04 10:52:47',
             ],
-        ]);
-
-        DB::table('time_slots')->whereIn('slot_id', [1, 7])->update([
-            'availability_status' => 'reserved'
-        ]);
-
-        DB::table('time_slots')->whereIn('slot_id', [2, 4, 5, 6, 8, 10])->update([
-            'availability_status' => 'booked'
-        ]);
-
-        DB::table('time_slots')->whereIn('slot_id', [3, 9])->update([
-            'availability_status' => 'available'
         ]);
     }
 }

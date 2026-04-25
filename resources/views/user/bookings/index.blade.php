@@ -5,7 +5,10 @@
 @section('content')
     <div class="heading">
         <h1>My bookings</h1>
-        <a href="{{ route('user.bookings.create') }}" class="btn">New booking</a>
+
+        <a href="{{ route('user.bookings.create') }}" class="btn">
+            New Booking
+        </a>
     </div>
 
     <div class="card">
@@ -14,33 +17,30 @@
                 <tr>
                     <th>Reference</th>
                     <th>Room</th>
-                    <th>Date</th>
-                    <th>Time</th>
+                    <th>Customer</th>
                     <th>Pax</th>
-                    <th>Status</th>
-                    <th></th>
+                    <th>Amount</th>
+                    <th>Payment Status</th>
                 </tr>
             </thead>
+
             <tbody>
                 @forelse($bookings as $booking)
                     <tr>
-                        <td>{{ $booking->booking_reference }}</td>
-                        <td>{{ $booking->room->room_name ?? 'N/A' }}</td>
-                        <td>{{ $booking->timeSlot ? \Carbon\Carbon::parse($booking->timeSlot->slot_date)->format('d M Y') : 'N/A' }}</td>
-                        <td>{{ $booking->timeSlot ? \Carbon\Carbon::parse($booking->timeSlot->start_time)->format('H:i') : 'N/A' }}</td>
-                        <td>{{ $booking->pax }}</td>
+                        <td>{{ $booking->booking_id }}</td>
+                        <td>{{ $booking->room->room_name ?? '-' }}</td>
+                        <td>{{ $booking->customer_name ?? '-' }}</td>
+                        <td>{{ $booking->pax ?? '-' }}</td>
+                        <td>RM {{ number_format($booking->total_amount ?? 0, 2) }}</td>
                         <td>
-                            <span class="badge {{ $booking->payment_status === 'pending' ? 'status--pending' : 'status--confirmed' }}">
-                                {{ ucfirst($booking->payment_status) }}
-                            </span>
+                           <span class="badge {{ $booking->payment_status === 'pending' ? 'status--pending' : 'status--confirmed' }}">
+    {{ ucfirst($booking->payment_status) }}
+</span>
                         </td>
-                        <td><a href="{{ route('user.bookings.show', $booking->booking_id) }}">Details</a></td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" style="text-align: center; color: #6b7280; padding: 2rem;">
-                            You have no active bookings.
-                        </td>
+                        <td colspan="6">No bookings found.</td>
                     </tr>
                 @endforelse
             </tbody>

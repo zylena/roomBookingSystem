@@ -190,8 +190,13 @@
             @forelse($bookings as $booking)
                 <tr>
                     <td class="col-id">{{ $booking->booking_id }}</td>
-                    <td class="col-ref">{{ $booking->booking_reference }}</td>
-                    <td class="col-customer">{{ $booking->customer_name }}</td>
+                    <td style="min-width: 170px; white-space: nowrap;">
+                        {{ $booking->booking_reference }}
+                    </td>
+
+                    <td style="min-width: 180px; white-space: nowrap;">
+                        {{ $booking->customer_name }}
+                    </td>
                     <td class="col-room">{{ $booking->room->room_name ?? 'N/A' }}</td>
 
                     <td class="col-pax">

@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('booking_reference', 50)->unique();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('room_id');
-            $table->unsignedBigInteger('slot_id');
+            $table->unsignedBigInteger('slot_id')->nullable();
             $table->string('customer_name', 100);
             $table->integer('pax');
             $table->decimal('total_amount', 10, 2);
@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('room_id')->references('room_id')->on('rooms');
-            $table->foreign('slot_id')->references('slot_id')->on('time_slots');
+            $table->foreign('slot_id')->references('slot_id')->on('time_slots')->nullOnDelete();
         });
     }
 

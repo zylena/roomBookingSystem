@@ -3,7 +3,9 @@
 @section('title', 'Booking History')
 
 @section('content')
-    <h1>Booking history</h1>
+    <div class="heading">
+        <h1>Booking History</h1>
+    </div>
 
     <div class="card">
         <table>
@@ -11,29 +13,69 @@
                 <tr>
                     <th>Reference</th>
                     <th>Room</th>
-                    <th>Date</th>
-                    <th>Time</th>
+                    <th>Customer</th>
                     <th>Pax</th>
                     <th>Amount</th>
                     <th>Status</th>
+                    <th>Created At</th>
+                    <th>Expired At</th>
                 </tr>
             </thead>
+
             <tbody>
-                @forelse($bookings as $booking)
+                @forelse($history as $booking)
+                    @php
+                        $isExpired = $booking->payment_status === 'pending'
+                            && $booking->expires_at
+                            && \Carbon\Carbon::parse($booking->expires_at)->lt(now());
+
+                        $displayStatus = $isExpired ? 'expired' : $booking->payment_status;
+
+                        $badgeClass = match ($displayStatus) {
+                            'paid' => 'status--confirmed',
+                            'cancelled', 'expired' => 'status--pending',
+                            default => 'status--pending',
+                        };
+                    @endphp
+
                     <tr>
-                        <td>{{ $booking->booking_reference }}</td>
-                        <td>{{ $booking->room->room_name ?? 'N/A' }}</td>
-                        <td>{{ $booking->timeSlot ? \Carbon\Carbon::parse($booking->timeSlot->slot_date)->format('d M Y') : 'N/A' }}</td>
-                        <td>{{ $booking->timeSlot ? \Carbon\Carbon::parse($booking->timeSlot->start_time)->format('H:i') : 'N/A' }}</td>
-                        <td>{{ $booking->pax }}</td>
-                        <td>RM {{ number_format($booking->total_amount, 2) }}</td>
-                        <td><span class="badge">{{ ucfirst($booking->payment_status) }}</span></td>
+                        <td style="white-space: nowrap;">
+                            {{ $booking->booking_reference }}
+                        </td>
+
+                        <td>
+                            {{ $booking->room->room_name ?? '-' }}
+                        </td>
+
+                        <td>
+                            {{ $booking->customer_name ?? '-' }}
+                        </td>
+
+                        <td>
+                            {{ $booking->pax ?? '-' }}
+                        </td>
+
+                        <td>
+                            RM {{ number_format($booking->total_amount ?? 0, 2) }}
+                        </td>
+
+                        <td>
+                            <span class="badge {{ $badgeClass }}">
+                                {{ ucfirst($displayStatus) }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {{ $booking->created_at ? \Carbon\Carbon::parse($booking->created_at)->format('d M Y, h:i A') : '-' }}
+                        </td>
+
+                        <td>
+                            {{ $booking->expires_at ? \Carbon\Carbon::parse($booking->expires_at)->format('d M Y, h:i A') : '-' }}
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" style="text-align: center; color: #6b7280; padding: 2rem;">
-                            No booking history found.
-                        </td>
+                        <td colspan="8">No booking history found.</td>
                     </tr>
                 @endforelse
             </tbody>

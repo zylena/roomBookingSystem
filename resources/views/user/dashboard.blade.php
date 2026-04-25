@@ -20,11 +20,5 @@
             <p style="margin: 0.6rem 0 1rem; color: rgba(31, 41, 55, 0.75);">You have completed <strong>{{ $stats['pastBookings'] }}</strong> bookings.</p>
             <a href="{{ route('user.history') }}" class="btn" style="font-size: 0.9rem;">View history</a>
         </div>
-
-        <div class="card">
-            <h3>Browse rooms</h3>
-            <p style="margin: 0.6rem 0 1rem; color: rgba(31, 41, 55, 0.75);">Explore available escape rooms and make a new booking.</p>
-            <a href="{{ route('public.rooms.index') }}" class="btn" style="font-size: 0.9rem;">Browse rooms</a>
-        </div>
     </div>
 @endsection
