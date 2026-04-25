@@ -139,115 +139,76 @@
 
 <div class="bookings-header">
     <div class="heading">
-        <div>
-            <h1>Manage bookings</h1>
-            <p class="heading-desc">This list represents current bookings. Use this view to review and manage bookings.</p>
-        </div>
-    </div>
-
-    <div class="toolbar">
-        <div class="search-box">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input type="text" placeholder="Search bookings...">
-        </div>
-        <div class="toolbar-actions">
-            <select class="filter-select">
-                <option value="">All Status</option>
-                <option value="confirmed">Confirmed</option>
-                <option value="pending">Pending</option>
-                <option value="cancelled">Cancelled</option>
-            </select>
-        </div>
+        <h1>Manage bookings</h1>
     </div>
 </div>
 
-    <div class="card">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Customer</th>
-                    <th>Room</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($bookings as $booking)
-                    <tr>
-                        <td>{{ $booking['id'] }}</td>
-                        <td>{{ $booking['customer'] }}</td>
-                        <td>{{ $booking['room'] }}</td>
-                        <td>{{ $booking['date'] }}</td>
-                        <td>
-                            <span class="badge {{ $booking['status'] === 'Confirmed' ? 'badge--confirmed' : ($booking['status'] === 'Pending' ? 'badge--pending' : 'badge--cancelled') }}">
-                                {{ $booking['status'] }}
-                            </span>
-                        </td>
-                        <td>
-                            <div class="table-actions">
-                                <a href="#" class="action-btn" title="View">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                </a>
-                                <a href="#" class="action-btn" title="Edit">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+@if(session('success'))
+    <div class="success-alert">
+        {{ session('success') }}
     </div>
-@endsection
+@endif
 
-@section('scripts')
-<script>
-    const searchInput = document.querySelector('.search-box input');
-    const filterSelect = document.querySelector('.filter-select');
-    const tableRows = document.querySelectorAll('tbody tr');
+<div class="card bookings-card">
+    <table class="bookings-table">
+        <thead>
+            <tr>
+                <th class="col-id">ID</th>
+                <th class="col-ref">Reference</th>
+                <th class="col-customer">Customer</th>
+                <th class="col-room">Room</th>
+                <th class="col-pax">Pax</th>
+                <th class="col-amount">Amount</th>
+                <th class="col-payment">Payment</th>
+                <th class="col-method">Method</th>
+                <th class="col-action">Action</th>
+            </tr>
+        </thead>
 
-    function filterTable() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const statusFilter = filterSelect.value.toLowerCase();
+        <tbody>
+            @forelse($bookings as $booking)
+                <tr>
+                    <td class="col-id">{{ $booking->booking_id }}</td>
+                    <td class="col-ref">{{ $booking->booking_reference }}</td>
+                    <td class="col-customer">{{ $booking->customer_name }}</td>
+                    <td class="col-room">{{ $booking->room->room_name ?? 'N/A' }}</td>
 
-        tableRows.forEach(row => {
-            const customer = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
-            const room = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
-            const status = row.querySelector('.badge').textContent.toLowerCase();
+                    <td class="col-pax">
+                        {{ $booking->pax }}
+                    </td>
 
-            const matchesSearch = customer.includes(searchTerm) || room.includes(searchTerm);
-            const matchesStatus = !statusFilter || status.includes(statusFilter);
+                    <td class="col-amount">
+                        RM {{ number_format($booking->total_amount, 2) }}
+                    </td>
 
-            row.style.display = matchesSearch && matchesStatus ? '' : 'none';
-        });
-    }
+                    <td class="col-payment">
+                        <span class="badge">{{ $booking->payment_status }}</span>
+                    </td>
 
-    searchInput.addEventListener('input', filterTable);
-    filterSelect.addEventListener('change', filterTable);
+                    <td class="col-method">
+                        {{ $booking->payment_method ?? 'N/A' }}
+                    </td>
 
-    document.querySelectorAll('.action-btn[title="View"]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('View booking details - to be implemented');
-        });
-    });
+                    <td class="col-action">
+                        <div class="action-group">
+                            <a href="{{ route('admin.bookings.edit', $booking->booking_id) }}" class="btn btn-link">Edit</a>
 
-    document.querySelectorAll('.action-btn[title="Edit"]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Edit booking - to be implemented');
-        });
-    });
-</script>
+                            <form method="POST" action="{{ route('admin.bookings.destroy', $booking->booking_id) }}" onsubmit="return confirm('Are you sure you want to delete this booking?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="9" class="empty-row">
+                        No bookings found.
+                    </td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 @endsection
