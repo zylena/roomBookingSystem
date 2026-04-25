@@ -3,6 +3,129 @@
 @section('title', 'Manage Rooms')
 
 @section('content')
+<style>
+    .rooms-table .col-image {
+    width: 110px;
+    text-align: center;
+        }   
+
+    .room-thumb {
+        width: 80px;
+        height: 55px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+    .rooms-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+    }
+
+    .rooms-card {
+        max-width: 950px;
+        margin: 0 auto;
+    }
+
+    .rooms-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .rooms-table th,
+    .rooms-table td {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid #e5e7eb;
+        vertical-align: middle;
+    }
+
+    .rooms-table .col-id {
+        width: 80px;
+        text-align: left;
+    }
+
+    .rooms-table .col-name {
+        width: auto;
+        text-align: left;
+    }
+
+    .rooms-table .col-status {
+        width: 160px;
+        text-align: center;
+    }
+
+    .rooms-table .col-action {
+        width: 200px;
+        text-align: center;
+    }
+
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 70px;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        background: #e8f0ff;
+        color: #2563eb;
+        font-weight: 600;
+    }
+
+    .action-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .action-group form {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 38px;
+        padding: 0 0.9rem;
+        border-radius: 10px;
+        border: none;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 0.95rem;
+        line-height: 1;
+    }
+
+    .btn-primary {
+        background: #2563eb;
+        color: white;
+    }
+
+    .btn-link {
+        color: #2563eb;
+        background: transparent;
+    }
+
+    .btn-danger {
+        color: #dc2626;
+        background: transparent;
+    }
+
+    .success-alert {
+        max-width: 950px;
+        margin: 0 auto 1rem auto;
+        padding: 0.85rem 1rem;
+        border-radius: 12px;
+        background: #dcfce7;
+        color: #166534;
+    }
+</style>
+
+<div class="rooms-header">
     <div class="heading">
         <div>
             <h1>Manage rooms</h1>

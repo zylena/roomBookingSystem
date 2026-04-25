@@ -3,6 +3,141 @@
 @section('title', 'Manage Bookings')
 
 @section('content')
+<style>
+    .bookings-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+    }
+
+    .bookings-card {
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow-x: auto;
+    }
+
+    .bookings-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .bookings-table th,
+    .bookings-table td {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid #e5e7eb;
+        vertical-align: middle;
+        text-align: left;
+    }
+
+    .bookings-table .col-id {
+        width: 70px;
+    }
+
+    .bookings-table .col-ref {
+        width: 150px;
+    }
+
+    .bookings-table .col-customer {
+        width: 160px;
+    }
+
+    .bookings-table .col-room {
+        width: 170px;
+    }
+
+    .bookings-table .col-pax {
+        width: 70px;
+        text-align: center;
+    }
+
+    .bookings-table .col-amount {
+        width: 120px;
+        text-align: center;
+    }
+
+    .bookings-table .col-payment {
+        width: 130px;
+        text-align: center;
+    }
+
+    .bookings-table .col-method {
+        width: 130px;
+        text-align: center;
+    }
+
+    .bookings-table .col-action {
+        width: 160px;
+        text-align: center;
+    }
+
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 70px;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        background: #e8f0ff;
+        color: #2563eb;
+        font-weight: 600;
+    }
+
+    .action-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+
+    .action-group form {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 38px;
+        padding: 0 0.9rem;
+        border-radius: 10px;
+        border: none;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 0.95rem;
+        line-height: 1;
+    }
+
+    .btn-link {
+        color: #2563eb;
+        background: transparent;
+    }
+
+    .btn-danger {
+        color: #dc2626;
+        background: transparent;
+    }
+
+    .success-alert {
+        max-width: 1200px;
+        margin: 0 auto 1rem auto;
+        padding: 0.85rem 1rem;
+        border-radius: 12px;
+        background: #dcfce7;
+        color: #166534;
+    }
+
+    .empty-row {
+        text-align: center;
+        color: #6b7280;
+    }
+</style>
+
+<div class="bookings-header">
     <div class="heading">
         <div>
             <h1>Manage bookings</h1>
@@ -27,6 +162,7 @@
             </select>
         </div>
     </div>
+</div>
 
     <div class="card">
         <table>

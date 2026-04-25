@@ -8,6 +8,8 @@ class Booking extends Model
 {
     protected $primaryKey = 'booking_id';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'booking_reference',
         'user_id',
@@ -18,18 +20,16 @@ class Booking extends Model
         'total_amount',
         'payment_status',
         'payment_method',
-        'expires_at'
+        'expires_at',
     ];
 
-  
     public function room()
     {
-        return $this->belongsTo(Room::class, 'room_id');
+        return $this->belongsTo(Room::class, 'room_id', 'room_id');
     }
 
- 
     public function timeSlot()
     {
-        return $this->belongsTo(TimeSlot::class, 'slot_id');
+        return $this->belongsTo(TimeSlot::class, 'slot_id', 'slot_id');
     }
 }

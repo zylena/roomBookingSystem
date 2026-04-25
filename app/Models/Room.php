@@ -10,6 +10,7 @@ class Room extends Model
     protected $primaryKey = 'room_id';
     public $incrementing = true;
     protected $keyType = 'int';
+    public $timestamps = false;
 
     protected $fillable = [
         'theme_id',
@@ -25,7 +26,7 @@ class Room extends Model
 
     public function theme()
     {
-        return $this->belongsTo(Theme::class, 'theme_id');
+        return $this->belongsTo(Theme::class, 'theme_id', 'theme_id');
     }
 
   
