@@ -27,8 +27,3 @@ Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->nam
     Route::get('/rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
     Route::put('/rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
     Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
-
-//for users
-
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
