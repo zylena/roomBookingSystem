@@ -97,6 +97,13 @@ public function login(Request $request)
                   //session
                   $request->session()->regenerate();
 
+                  session()->put('app_user', [
+                 'id' => $user->id,
+                 'name' => $user->name,
+                 'email' => $user->email,
+                 'role' => $user->role,
+            ]);
+
 
                 $request->session()->put('user_id', $user->id);
                 $request->session()->put('user_name', $user->name);

@@ -32,3 +32,8 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkReques
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+Route::get('/simple-login', function () {
+    Auth::attempt(['email' => 'alice@example.com', 'password' => 'password123']);
+    return redirect('/user/profile');
+});

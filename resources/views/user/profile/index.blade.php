@@ -5,9 +5,16 @@
 @section('content')
     <h1>My profile</h1>
 
+    @if(session('success'))
+    <div style="background-color: #2d6cdf; color: white; padding: 0.5rem; border-radius: 8px; margin-bottom: 1rem;">
+        {{ session('success') }}
+    </div>
+@endif
+
     <div class="card" style="max-width: 660px;">
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('user.profile.update') }}">
             @csrf
+            @method('PUT')
 
             <div class="form-field">
                 <label for="name">Name</label>

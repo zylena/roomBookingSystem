@@ -15,3 +15,5 @@ Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.st
 Route::get('/bookings/{id}', [BookingController::class, 'show'])->name('bookings.show');
 Route::get('/bookings/{id}/payment', [BookingController::class, 'payment'])->name('bookings.payment');
 Route::get('/history', [BookingController::class, 'history'])->name('history');
+
+Route::put('/profile', [App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');
