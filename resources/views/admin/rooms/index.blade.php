@@ -142,49 +142,49 @@
 
 <div class="card rooms-card">
     <table class="rooms-table">
-        <thead>
+    <thead>
+        <tr>
+            <th class="col-id">ID</th>
+            <th class="col-image">Image</th>
+            <th class="col-name">Name</th>
+            <th class="col-status">Status</th>
+            <th class="col-action">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach($rooms as $room)
             <tr>
-                <th class="col-id">ID</th>
-                <th class="col-image">Image</th>
-                <th class="col-name">Name</th>
-                <th class="col-status">Status</th>
-                <th class="col-action">Action</th>
+                <td class="col-id">{{ $room->room_id }}</td>
+
+                <td class="col-image">
+                    @if($room->image_url)
+                        <img src="{{ asset($room->image_url) }}" alt="{{ $room->room_name }}" class="room-thumb">
+                    @else
+                        -
+                    @endif
+                </td>
+
+                <td class="col-name">{{ $room->room_name }}</td>
+
+                <td class="col-status">
+                    <span class="badge">{{ $room->status }}</span>
+                </td>
+
+                <td class="col-action">
+                    <div class="action-group">
+                        <a href="{{ route('admin.rooms.edit', $room->room_id) }}" class="btn btn-link">Edit</a>
+
+                        <form method="POST" action="{{ route('admin.rooms.destroy', $room->room_id) }}" onsubmit="return confirm('Are you sure you want to delete this room?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
             </tr>
-        </thead>
-
-        <tbody>
-            @foreach($rooms as $room)
-                <tr>
-                    <td class="col-id">{{ $room->room_id }}</td>
-
-                    <td class="col-image">
-                        @if($room->image_url)
-                            <img src="{{ asset($room->image_url) }}" alt="{{ $room->room_name }}" class="room-thumb">
-                        @else
-                            -
-                        @endif
-                    </td>
-
-                    <td class="col-name">{{ $room->room_name }}</td>
-
-                    <td class="col-status">
-                        <span class="badge">{{ $room->status }}</span>
-                    </td>
-
-                    <td class="col-action">
-                        <div class="action-group">
-                            <a href="{{ route('admin.rooms.edit', $room->room_id) }}" class="btn btn-link">Edit</a>
-
-                            <form method="POST" action="{{ route('admin.rooms.destroy', $room->room_id) }}" onsubmit="return confirm('Are you sure you want to delete this room?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+        @endforeach
+    </tbody>
+</table>
 </div>
 @endsection
