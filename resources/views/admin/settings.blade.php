@@ -4,8 +4,10 @@
 
 @section('content')
     <div class="heading">
-        <h1>Settings</h1>
-        <p style="color: rgba(31, 41, 55, 0.75);">Configure application options and system defaults.</p>
+        <div>
+            <h1>Settings</h1>
+            <p class="heading-desc">Configure application options and system defaults.</p>
+        </div>
     </div>
 
     <div class="card" style="max-width: 760px;">
