@@ -34,6 +34,13 @@ class ProfileController extends Controller
         $user->email = $request->input('email');
         $user->save();
 
+        session()->put('app_user', [
+        'id' => $user->id,
+        'name' => $user->name,
+        'email' => $user->email,
+        'role' => $user->role,
+        ]);
+
         return redirect()
             ->route('user.profile')
             ->with('status', 'Profile updated successfully.');

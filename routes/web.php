@@ -38,3 +38,10 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showRese
 
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
     ->name('password.update');
+
+//Wai Lam acc
+Route::get('/simple-login', function () {
+    Auth::attempt(['email' => 'alice@example.com', 'password' => 'password123']);
+    return redirect('/user/profile');
+});
+
