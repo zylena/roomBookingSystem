@@ -18,10 +18,13 @@
 
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
+
             <div class="form-field">
                 <label for="email">Email</label>
                 <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus>
-                @error('email') <span class="error">{{ $message }}</span> @enderror
+                @error('email')
+                    <span class="error">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="form-actions" style="margin-top: 1.5rem;">
@@ -29,7 +32,8 @@
             </div>
 
             <p style="text-align: center; margin-top: 1.5rem;">
-<a href="/login">Remember your password? Back to login</a>
+                <a href="/login">Remember your password? Back to login</a>
+            </p>
         </form>
     </div>
 </section>
