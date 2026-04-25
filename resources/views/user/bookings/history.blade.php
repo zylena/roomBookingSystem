@@ -9,21 +9,33 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Reference</th>
                     <th>Room</th>
                     <th>Date</th>
+                    <th>Time</th>
+                    <th>Pax</th>
+                    <th>Amount</th>
                     <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($history as $item)
+                @forelse($bookings as $booking)
                     <tr>
-                        <td>{{ $item['id'] }}</td>
-                        <td>{{ $item['room'] }}</td>
-                        <td>{{ $item['date'] }}</td>
-                        <td><span class="badge status--confirmed">{{ $item['status'] }}</span></td>
+                        <td>{{ $booking->booking_reference }}</td>
+                        <td>{{ $booking->room->room_name ?? 'N/A' }}</td>
+                        <td>{{ $booking->timeSlot ? \Carbon\Carbon::parse($booking->timeSlot->slot_date)->format('d M Y') : 'N/A' }}</td>
+                        <td>{{ $booking->timeSlot ? \Carbon\Carbon::parse($booking->timeSlot->start_time)->format('H:i') : 'N/A' }}</td>
+                        <td>{{ $booking->pax }}</td>
+                        <td>RM {{ number_format($booking->total_amount, 2) }}</td>
+                        <td><span class="badge">{{ ucfirst($booking->payment_status) }}</span></td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="7" style="text-align: center; color: #6b7280; padding: 2rem;">
+                            No booking history found.
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

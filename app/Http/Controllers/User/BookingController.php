@@ -9,10 +9,11 @@ class BookingController extends Controller
 {
     public function index()
     {
-        $bookings = [
-            ['id' => 101, 'room' => 'The Labyrinth', 'date' => '2026-04-01', 'status' => 'Confirmed'],
-            ['id' => 102, 'room' => 'Haunted Mansion', 'date' => '2026-04-12', 'status' => 'Pending'],
-        ];
+        $bookings = Booking::where('user_id', auth()->id())
+            ->whereIn('payment_status', ['pending', 'paid'])
+            ->with(['room', 'timeSlot'])
+            ->orderBy('booking_id', 'desc')
+            ->get();
 
         return view('user.bookings.index', compact('bookings'));
     }
@@ -61,12 +62,12 @@ class BookingController extends Controller
 
     public function history()
     {
-        //
-        $history = [
-            ['id' => 84, 'room' => 'Bank Heist', 'date' => '2025-12-10', 'status' => 'Completed'],
-            ['id' => 59, 'room' => 'Haunted Mansion', 'date' => '2025-10-21', 'status' => 'Completed'],
-        ];
+        $bookings = Booking::where('user_id', auth()->id())
+            ->where('payment_status', 'cancelled')
+            ->with(['room', 'timeSlot'])
+            ->orderBy('booking_id', 'desc')
+            ->get();
 
-        return view('user.bookings.history', compact('history'));
+        return view('user.bookings.history', compact('bookings'));
     }
 }
