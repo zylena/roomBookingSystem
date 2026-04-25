@@ -20,8 +20,5 @@ class DashboardController extends Controller
         return view('admin.dashboard', compact('metrics'));
     }
 
-    public function settings()
-    {
-        return view('admin.settings');
-    }
+   
 }

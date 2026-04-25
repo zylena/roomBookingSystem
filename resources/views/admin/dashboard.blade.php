@@ -34,7 +34,7 @@
             <li style="margin-bottom: 0.6rem;"><a href="{{ route('admin.rooms.index') }}">Manage rooms</a></li>
             <li style="margin-bottom: 0.6rem;"><a href="{{ route('admin.bookings.index') }}">View bookings</a></li>
             <li style="margin-bottom: 0.6rem;"><a href="{{ route('admin.users.index') }}">Manage users</a></li>
-            <li><a href="{{ route('admin.reports.index') }}">View reports</a></li>
+            
         </ul>
     </div>
 @endsection
