@@ -9,15 +9,8 @@ use App\Http\Controllers\Admin\UserController;
 
 // Admin area
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-
-//admin CRUD routes for bookings
 Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
-Route::get('/bookings/{booking}/edit', [BookingController::class, 'edit'])->name('bookings.edit');
-Route::put('/bookings/{booking}', [BookingController::class, 'update'])->name('bookings.update');
-Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->name('bookings.destroy');
-
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
 //admin CRUD routes for rooms
  
